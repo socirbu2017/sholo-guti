@@ -18,7 +18,7 @@ jobs:
         python-version: '3.10'
 
     - name: Build with Buildozer
-      uses: artemsbulgakov/buildozer-action@v1
+      uses: akshaybabloo/gaction-kivy-buildozer@v1
       with:
         command: buildozer -v android debug
         subfolder: .
