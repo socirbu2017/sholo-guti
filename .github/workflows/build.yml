@@ -25,15 +25,14 @@ jobs:
 
     - name: Install Python Dependencies
       run: |
-        pip install --upgrade pip setuptools
-        pip install "cython<3.0.0"
-        pip install buildozer
+        python3.10 -m pip install --upgrade pip setuptools
+        python3.10 -m pip install "cython<3.0.0" buildozer
 
     - name: Build APK with Buildozer
       run: |
         mkdir -p ~/.android
         touch ~/.android/repositories.cfg
-        yes | buildozer -v android debug
+        yes | python3.10 -m buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
