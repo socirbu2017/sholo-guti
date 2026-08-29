@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
+        steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
@@ -17,14 +17,20 @@ jobs:
       with:
         python-version: '3.10'
 
+    - name: Install dependencies and Buildozer
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y patch ccache libffi-dev libssl-dev python3-pip zip unzip openjdk-17-jdk
+        pip install --upgrade pip
+        pip install buildozer cython
+
     - name: Build with Buildozer
-      uses: akshaybabloo/gaction-kivy-buildozer@v1
-      with:
-        command: buildozer -v android debug
-        subfolder: .
+      run: |
+        buildozer -v android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-release
         path: bin/*.apk
+        
